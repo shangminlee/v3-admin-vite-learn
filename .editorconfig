@@ -1,0 +1,30 @@
+# .editorconfig一种配置文件，用于定义代码格式。它允许开发者在不同的编辑器和IDE之间
+# 定义和维护一致的编码格式。
+# 文件使用 INI 格式，包含了用于定义编发样式的配置项
+
+# 主要支持 .editorconfig 的编辑器有:
+# VS Code、Atom、Sublime Text、 Vim / Neovim、 WebStorm、 etc.
+
+# 含有 root = true 表示在这个文件中的规则将作为根项目的规则，作为默认规则，对整个项目生效
+# 没有 root = true 只在它所在目录及子目录生效。
+root = true
+
+[*]
+# 字符集为UTF-8
+charset = utf-8
+# 使用空格缩进
+indent_style = space
+# 缩进 2 个空格
+indent_size = 2
+# 换行符使用 LF
+end_of_line = lf
+# 文件末尾插入空行
+insert_final_newline = true
+# 去除行尾空格
+trim_trailing_whitespace = true
+
+[*.md]
+insert_final_newline = false
+trim_trailing_whitespace = false
+
+
