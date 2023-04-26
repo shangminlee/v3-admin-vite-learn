@@ -1,25 +1,86 @@
 {
   "compilerOptions": {
-    "target": "ES2020",
+    // 指定 TS 编译的 ECMAScript 目标版本
+    "target": "esnext",
+    // 在编译 class 时，使用 Object.defineProperty() 来定义属性，而不是简单的 .prop = value
+    // 适用：1. 需要广泛浏览器兼容的项目。 2. 需要 Tree-shaking 的项目。
     "useDefineForClassFields": true,
-    "module": "ESNext",
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
-    "skipLibCheck": true,
-
-    /* Bundler mode */
-    "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "preserve",
-
-    /* Linting */
+    // 指定了 TS 编译后的模块规范
+    "module": "esnext",
+    // 指定 TS 中的模块解析策略
+    "moduleResolution": "node",
+    // TS 严格模式
     "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    // 指定了 TS 中是否支持 JSX(javascript XML)
+    "jsx": "preserve",
+    // 指定了在编译过程中是否导入 helper 函数(比如 __extends)
+    // 优点:
+    //   1、编译结果体积更小，helper 函数不会重复出现。
+    //   2、更方便进行 tree-shaking。
+    // helper 函数的作用：
+    //   1. 使 TS 中使用的新特性(ES6+)也可以在老版本环境中运行
+    //   2. 通过这些函数模拟生效的新语法，从而“转换”新语法为旧环境支持的写法
+    "importHelpers": true,
+    // 指定了在 TS 中是否启用实验性的装饰器功能
+    "experimentalDecorators": true,
+    // 指定了是否允许从没有默认导出的模块中默认导入
+    // 默认情况下，TS 如果一个模块没有默认导出，则不能使用默认导入来导入它
+    "allowSyntheticDefaultImports": true,
+    // 控制是否为编译后的代码生成对应的 source map 文件
+    // Source map 文件主要作用：
+    // 1. 调试 TS 代码
+    //    source map 文件包含 TS 源代码与编译生成的 JS 代码之间的映射关系。意味着
+    //    在浏览器 devtools 中调试时，可以直接查看 TS 源代码，不仅仅是 JS 代码。
+    // 2. 更准确的错误堆栈信息
+    // 3. 更友好的 bug 报告
+    "sourceMap": true,
+    // 指定了是否从 .json 文件中解析 TS 模块
+    // 默认情况下, TS 只从 .ts 或 .tsx 文件中解析模块导入，打开 resolveJsonModule 后,
+    // TS 会扩展模块解析算法，也会去 .json 文件中查找模块。
+    // 可以直接导入 .json 并使用
+    "resolveJsonModule": true,
+    // 指定了编译器是否将 TS 文件作为 isolated 模块编译
+    // 什么是 isolate 模块？
+    //     在编译结果中为每一个模块创建一个独立的 scope，这意味着，各个模块的作用域时相互
+    //     隔离的，模块之间的交互只能通过 Module.ModuleName 形式的全限定名实现。
+    "isolatedModules": true,
+    // 指定了编译器是否应该生成用于支持 ES 模块互操作性的代码。
+    // 什么是 ES 模块互操作性？
+    //     ES模块与CommonJS模块之间的兼容性
+    // 开启之后，TS 会生成两份模块定义，一个为 ES 模块，一个为 CommonJS 模块。
+    "esModuleInterop": true,
+    // 指定了要包含在编译中的库文件
+    "lib": ["ESNext", "DOM"],
+    // 指定了是否跳过对声明文件（如 .d.ts 文件）的类型检查
+    "skipLibCheck": true,
+    // 指定用于指定要包含的类型声明文件（.d.ts）文件列表
+    "types": [
+      "node",
+      "vite/client",
+      "element-plus/global",
+      "vitest",
+      "vitest/globals",
+      "unplugin-vue-define-options/macros-global"
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    }
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "vueCompilerOptions": {
+    "target": 3,
+    "plugins": ["@vue-macros/volar/define-options"]
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "tests/**/*.ts",
+    "types/**/*.d.ts",
+    "vite.config.ts",
+    "vitest.config.ts"
+  ],
+  /** 编译器默认排除的编译文件 */
+  "exclude": ["node_modules", "dist"]
 }

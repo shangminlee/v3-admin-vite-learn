@@ -1016,8 +1016,6 @@ export default {
 
 ### @vue-macros/volar
 
-
-
 @vue-macros/volar 是一个 Volta 宏包,它可以让我们在 Vue 项目中使用 Volar 提供的 TypeScript 支持。
 
 @vue-macros/volar 的主要特点是: 
@@ -1027,3 +1025,824 @@ export default {
 3. 支持 Vue 的 Composition API 类型检查
 4. 支持 Vue Router v4 的类型检查
 5. 与 Volar 深度集成,简单易用
+
+安装：
+
+```bash
+npm install @vue-macros/volar -D
+```
+
+使用：
+
+```json
+// 在 package.json 中配置 volta 命令:
+
+"volta": {
+  "node": {
+    "preInstall": ["@vue-macros/volar"]
+  }
+}
+```
+
+### @vue/eslint-config-prettier
+
+@vue/eslint-config-prettier 是一个 ESLint 配置,它可以让 Prettier 与 ESLint 在 Vue 项目中协同工作。它可以让我们同时获得 Prettier 的代码格式化与 ESLint 的代码检查能力。
+
+@vue/eslint-config-prettier 的主要特点是:
+
+1. 在 Vue 项目中使得 Prettier 和 ESLint 兼容 
+2. 禁用 ESLint 中与 Prettier 有冲突的规则 
+3. 支持 Vue 的最新特性 
+4. 与 ESLint 深度集成,简单易用
+
+安装：
+
+```bash
+npm install --save-dev @vue/eslint-config-prettier
+```
+
+使用：
+
+```javascript
+// .eslintrc.js
+module.exports = {
+  extends: [
+    '@vue/eslint-config-prettier'
+  ]
+}
+```
+
+### @vue/eslint-config-typescript
+
+@vue/eslint-config-typescript 是一个 ESLint 配置,它可以让我们在 Vue + TypeScript 项目中获得基础的 lint 规则。它提供了一套出箱即用的 TypeScript Vue 开发 lint 规范。
+
+@vue/eslint-config-typescript 的主要特点是: 
+
+1. 提供 Vue + TypeScript 项目基础的 lint 规则 
+2. 支持 TypeScript 语言规范 
+3. 支持 Vue 单文件组件规范 
+4. 支持 Composition API 规范 
+5. 与 ESLint 深度集成,简单易用
+
+安装：
+
+```bash
+npm install --save-dev @vue/eslint-config-typescript
+```
+
+使用：
+
+```javascript
+// .eslintrc.js
+module.exports = {
+  extends: [
+    '@vue/typescript/recommended'
+  ]
+}
+```
+
+### @vue/test-utils
+
+@vue/test-utils 是一个用于测试 Vue 组件的实用程序库。它可以让我们轻松地为 Vue 组件编写单元测试和快照测试。
+
+@vue/test-utils 的主要特点是: 
+
+1. 用于测试 Vue 组件的官方库 
+2. 提供丰富的 API 来模拟组件行为 
+3. 支持 Jest 和 Mocha 测试框架 
+4. 与 Vue 深度集成,支持 Vue 的最新特性 
+5. 简单易用,可以快速为 Vue 组件编写测试
+
+安装：
+
+```bash
+npm install --save-dev @vue/test-utils
+```
+
+使用：
+
+```vue
+<template>
+  <div>{{ count }}</div>
+  <button @click="increment">Increment</button>
+</template>
+
+<script lang="ts">
+import { defineComponent } from 'vue'
+
+export default defineComponent({
+  data() {
+    return {
+      count: 0
+    }
+  },
+  methods: {
+    increment() {
+      this.count++
+    }
+  }
+})
+</script>
+```
+
+对应的测试代码：
+
+```typescript
+import { shallowMount } from '@vue/test-utils'
+import Counter from '@/components/Counter.vue'
+
+describe('Counter.vue', () => {
+  test('renders counter value', () => {
+    const wrapper = shallowMount(Counter)
+    expect(wrapper.text()).toBe('0')
+  })
+  
+  test('clicking increment button increments counter', () => {
+    const wrapper = shallowMount(Counter)
+    wrapper.find('button').trigger('click')
+    expect(wrapper.text()).toBe('1')
+  })
+})
+```
+
+```typescript
+import { shallowMount, Wrapper } from '@vue/test-utils'
+import Counter from '@/components/Counter.vue'
+
+describe('Counter.vue', () => {
+  let wrapper: Wrapper<Vue>
+  
+  beforeEach(() => {
+    wrapper = shallowMount(Counter)
+  })
+  
+  test('initial value is 0', () => {
+    expect(wrapper.text()).toBe('0')
+  })
+  
+  test('clicking increment increments counter', () => {
+    wrapper.find('button').trigger('click')
+    expect(wrapper.text()).toBe('1')
+  })
+  
+  test('clicking increment 3 times results in 3', () => {
+    wrapper.find('button').trigger('click')
+    wrapper.find('button').trigger('click')
+    wrapper.find('button').trigger('click')
+    expect(wrapper.text()).toBe('3')
+  })
+}
+```
+
+
+
+### eslint
+
+ESLint 是一个静态代码检查工具,它可以帮助我们 lint 出更加优雅和统一的 JavaScript 代码风格。
+
+ESLint 的主要功能是:
+
+1. 检测 JavaScript 代码质量问题 
+2. 统一团队的 JavaScript 代码风格 
+3. 支持第三方插件扩展功能 
+4. 支持配置文件自定义规则 
+5. 支持自动修复一些代码问题
+
+安装：
+
+```bash
+npm install eslint --save-dev
+```
+
+使用：
+
+```bash
+# 初始化一个配置文件
+eslint --init
+```
+
+```javascript
+// 在 .eslintrc.js 中配置规则
+module.exports = {
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "extends": ["plugin:vue/essential", "eslint:recommended"],
+  "parserOptions": {
+    "parser": "babel-eslint"
+  },
+  "rules": {
+    "eqeqeq": ["error", "always"],
+    "no-console": "off"
+  }
+} 
+```
+
+```bash
+# 运行 ESLint 检查
+eslint yourfile.js
+```
+
+```bash
+# ESLint 会根据配置的规则对代码进行检查,报告不符合规则的问题。
+# 我们也可以使用 --fix 自动修复一些问题
+
+eslint yourfile.js --fix 
+```
+
+### eslint-plugin-prettier
+
+eslint-plugin-prettier 是一个将 prettier 规则集成到 ESLint 中的插件。它可以让我们同时使用 ESLint 和 Prettier 两个工具,获得代码质量和格式化双重保障。
+
+安装：
+
+```bash
+npm install --save-dev eslint-plugin-prettier
+```
+
+使用：
+
+```javascript
+// .eslintrc.js
+module.exports = {
+  plugins: ['prettier'],
+  extends: ['prettier'],
+  rules: {
+    'prettier/prettier': 'error'
+  }
+}
+```
+
+### eslint-plugin-vue
+
+eslint-plugin-vue 是一个将 Vue 规则集成到 ESLint 中的插件。它可以让我们对 .vue 文件进行 ESLint 检查,获得 Vue 组件的代码质量和风格保障。
+
+安装：
+
+```bash
+npm install eslint-plugin-vue --save-dev
+```
+
+使用：
+
+```javascript
+// .eslintrc.js
+module.exports = {
+  "extends": [
+    "plugin:vue/essential"
+  ],
+  "rules": {
+      "vue/max-attributes-per-line": [
+        "error", 
+        {
+          "singleline": 10,
+          "multiline": {
+            "max": 1,
+            "allowFirstLine": true
+          }
+        }
+      ]
+    }
+}
+```
+
+### husky
+
+Husky 是一个可以在 Git hooks 中执行代码的工具。它可以用于实现一些 Git 自动化操作,例如:
+
+1. 在 commit 前自动执行 lint 工具检查代码 
+2. 在 push 前自动执行测试脚本 
+3. 在 merge 前自动同步主干代码等
+
+安装：
+
+```bash
+npm install husky --save-dev
+```
+
+使用：
+
+在 package.json 中添加 Git hook 脚本:
+
+```json
+"husky": {
+  "pre-commit": "lint-staged",
+  "pre-push": "npm test",
+  "post-merge": "npm run sync-master"
+}
+```
+
+> 这样会在 commit 前运行 lint-staged,在 push 前运行 npm test,在 merge 后运行 sync-master 脚本。然后我们就可以在这些 Git 生命周期中自动执行相应任务了。例如: 
+>
+> 1. 在 commit 之前自动 lint 代码 
+> 2. 在 push 之前自动运行测试 
+> 3. 在 merge 之后自动同步主干更新
+
+### jsdom
+
+jsdom 是一个 JavaScript 实现的 DOM 环境。它可以在 Node.js 中创建浏览器环境来运行前端代码。
+
+jsdom 的主要功能是: 
+
+1. 在 Node.js 中实现浏览器 DOM 环境 
+2. 可以在 Node.js 中运行浏览器 JavaScript 代码 
+3. 模拟浏览器中 DOM、HTML 等标准 
+4. 常用于测试前端 UI 组件等在没有浏览器的环境中
+
+安装：
+
+```bash
+npm install jsdom
+```
+
+使用：
+
+```typescript
+import { defineComponent, reactive, ref } from 'vue'
+import { JSDOM } from 'jsdom'
+
+const dom = new JSDOM('<!DOCTYPE html><div id="app"></div>')
+const { window } = dom
+
+export default defineComponent({
+  name: 'HelloWorld',
+  setup() {
+    const count = ref(0)
+    const state = reactive({
+      name: '张三'
+    })
+
+    function increment() {
+      count.value++
+    }
+
+    const render = () => {
+      window.document.querySelector('#app').innerHTML = `
+        <p>You clicked ${count.value} times</p>
+        <p>Name: ${state.name}</p>
+        <button onClick="increment()">Increment</button>
+      ` 
+    }
+
+    return {
+      count,
+      state,
+      increment,
+      render
+    }
+  }
+})
+
+render()
+expect(window.document.querySelector('p').textContent).toBe('You clicked 0 times')
+increment()
+render() 
+expect(window.document.querySelector('p').textContent).toBe('You clicked 1 times')
+```
+
+### lint-staged
+
+lint-staged 是一个在 git 暂存文件上运行 linters(代码检查工具)的工具。它可以让我们在 commit 前只检查暂存的文件,而不是整个项目,从而提高 lint 工具的执行效率。
+
+安装：
+
+```bash
+npm install --save-dev lint-staged
+```
+
+使用：
+
+在 package.json 中添加 lint-staged 配置:
+
+```json
+"lint-staged": {
+  "*.js": ["eslint --fix", "git add"]
+}
+```
+
+```bash
+npm run lint-staged
+```
+
+### prettier
+
+它可以重新格式化我们的代码,使之符合一致的风格。我们只需要在每次保存代码时,让 Prettier 重新格式化代码,就可以很容易地实现整个项目的代码风格统一。
+
+安装：
+
+```bash
+npm install --save-dev prettier
+```
+
+使用：
+
+在 package.json 中添加 prettier 配置:
+
+```json
+"prettier": {
+  "printWidth": 100,         // 一行最多 100 字符
+  "tabWidth": 2,             // 使用 2 个空格缩进
+  "useTabs": false,          // 使用空格代替 tab
+  "semi": true,              // 在语句末尾使用分号
+  "singleQuote": true,       // 使用单引号
+  "trailingComma": "es5",    // 在对象和数组最后一个元素后面加逗号
+  "bracketSpacing": true     // 在对象的左大括号之前使用空格
+}
+```
+
+### Sass
+
+Sass 是一种 CSS 预处理器,它扩展了 CSS 的功能,使 CSS 的使用变得更加强大和简洁。
+
+Sass 具有以下主要特性: 
+
+1. 变量 - 可以将重复的值定义为变量
+
+2. 嵌套 - 可以以嵌套的方式编写 CSS 规则
+
+3. 混入(Mixin) - 可以定义可重用的样式规则
+
+4. 函数 - 可以利用函数简化一些计算
+
+5. 继承 - 可以通过继承来提取重复的属性
+
+6. 运算 - 可以直接在 CSS 中进行算数运算
+
+7. 注释 - 支持 CSS 注释以及单行注释 //
+
+8. 导入 - 可以将一个 Sass 文件导入到另一个 Sass 文件
+
+
+Sass 有两种语法: 
+
+1. SCSS(Sassy CSS) - 扩展 CSS 语法,文件名以 .scss 结尾 
+1. Sass - 使用缩进表示层级关系,文件名以 .sass 结尾SCSS 语法更容易学习,更接近 CSS,所以我们这里主要介绍 SCSS 语法
+
+安装：
+
+```bash
+npm install sass
+```
+
+使用：
+
+```scss
+scss
+// 定义变量
+$primary-color: blue;
+
+// 嵌套使用
+.page-header {
+  color: $primary-color;
+  
+  .title {
+    font-size: 2em;
+  }
+}
+
+// 混入(Mixin)
+@mixin center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.banner {
+  @include center;
+}
+
+// 继承
+.message {
+  color: red;
+}
+
+.success {
+  @extend .message;
+  border: 1px solid green; 
+}
+```
+
+执行编译：
+
+```bash
+sass input.scss output.css
+```
+
+### terser
+
+Terser 是一个 JavaScript 压缩工具。
+
+它可以压缩、美化和混淆我们的 JavaScript 代码。通过缩小代码体积和隐藏代码细节,Terser 可以帮助我们提高 JavaScript 的加载性能和加强代码安全性。
+
+安装：
+
+```bash
+npm install terser
+```
+
+使用：
+
+```bash
+# 压缩代码
+terser input.js -o output.js
+```
+
+```bash
+# 美化代码
+terser --beautify input.js -o output.js
+```
+
+```bash
+# 混淆代码
+terser --mangle --input input.js -o output.js
+```
+
+```bash
+# 同时执行多个操作
+terser --compress --mangle --beautify input.js -o output.js
+```
+
+### unocss
+
+UnoCSS 是一款基于原子类的 CSS 框架。它可以让我们使用 Utility 样式和 Tailwind CSS 类似的原子类来快速构建 UI,而无需编写自定义 CSS。
+
+主要特性:
+
+1. 原子类 - 提供大量可复用的 Utility 样式,基于这些样式快速构建 UI 
+2. purgecss - 添加 purgecss 优化,移除未使用的 CSS 
+3. 主题定制 - 支持自定义颜色主题 
+4. 响应式 - 内置响应式设计,组件会根据屏幕宽度自动调整
+5. 预处理器 - 支持 Sass、PostCSS 等 CSS 预处理器 
+
+安装：
+
+```bash
+npm install unocss
+```
+
+使用：
+
+```typescript
+import 'unocss';
+```
+
+```html
+<div class="p-4 rounded bg-blue-500 text-white">Hello World</div>
+```
+
+
+
+### unplugin-vue-define-options
+
+unplugin-vue-define-options 是一个 Vue 插件,它可以让我们在组件中定义 type: Object 类型的 prop,并在使用该组件时提供默认选项。
+
+它主要解决的问题是:当我们定义 type: Object 的 prop 时,如果不提供默认值,则该 prop 的默认值会是 undefined。这会导致在模板中使用该 prop 时报错。
+
+unplugin-vue-define-options 可以通过为 type: Object 的 prop 提供默认选项来解决这个问题。
+
+安装：
+
+```bash
+npm install unplugin-vue-define-options
+```
+
+使用：
+
+在 Vue 文件中定义组件,并为 type: Object 的 prop 指定默认选项:
+
+```vue
+<script>
+import { defineOptions } from 'unplugin-vue-define-options'
+
+export default defineOptions({
+  props: {
+    options: {
+      type: Object,
+      default: () => ({
+        foo: true
+      })
+    }
+  }
+})
+</script>
+```
+
+```vue
+<my-component />
+
+<my-component :options="{ foo: true }" />
+```
+
+
+
+### vite-plugin-svg-icons
+
+vite-plugin-svg-icons 是一个 Vite 插件,它可以让我们轻松地将 SVG 图标作为组件导入并使用。
+
+主要功能: 
+
+1. 自动导入 SVG 文件并生成对应组件 
+2. 支持给组件设置默认导出名称 
+3. 支持给每个图标设置 id、类名等 
+4. 支持定制每个图标的样式  
+5. 内置 tree shaking,移除未使用的图标 
+
+安装：
+
+```bash
+npm install vite-plugin-svg-icons
+```
+
+使用：
+
+1. 在 vite.config.js 中添加插件:
+
+   ```js
+   import vitePluginSvgIcons from 'vite-plugin-svg-icons'
+   
+   export default {
+     plugins: [
+       vitePluginSvgIcons({
+         // 指定需要处理的 svg 文件夹
+         iconDirs: [path.resolve(dir, 'src/assets/icons')],
+         // 生成的 svg 组件默认导出名称
+         symbolId: 'icon-[name]', 
+       })
+     ]
+   }
+   ```
+
+2. 然后在代码中按如下方式使用 SVG 图标:
+
+   ```vue
+   <template>
+     <icon-home />
+   </template>
+   
+   <script>
+   import IconHome from '@/assets/icons/home.svg?component'
+   
+   export default {
+     components: {
+       IconHome
+     }
+   }
+   </script>
+   ```
+
+3. ```vue
+   <svg><use xlink:href="@/assets/icons/home.svg?inline"></use></svg> 
+   ```
+
+   
+
+### vite-svg-loader
+
+vite-svg-loader 是一个 Vite 插件,它可以让我们轻松地将 SVG 文件导入为 Vue 组件或 SVG XML 片段。
+
+主要功能:
+
+1. 将 SVG 文件导入为 Vue 组件 
+2. 将 SVG 文件导入为 SVG XML 片段 
+3. 支持给 SVG 组件设置 id、class 等 
+4. 支持定制 SVG 组件或 XML 片段的样式 
+5. 移除未使用的 SVG 文件 
+
+安装：
+
+```bash
+npm install vite-svg-loader
+```
+
+使用：
+
+1. 在 vite.config.js 中添加插件:
+
+   ```javascript
+   import viteSvgLoader from 'vite-svg-loader'
+   
+   export default {
+     plugins: [
+       viteSvgLoader({
+         // 指定 svg 文件目录
+         svgo: {
+           input: './src/assets/icons'
+         }
+       })
+     ]
+   }
+   ```
+
+2. 然后我们可以按如下方式导入和使用 SVG
+
+   ```vue
+   <template>
+     <svg-home />
+   </template>
+   
+   <script>
+   import SvgHome from '@/assets/icons/home.svg?vue&ref' 
+   export default {
+     components: {
+       SvgHome
+     }
+   }
+   </script>
+   ```
+
+3. 作为 SVG XML 片段
+
+   ```vue
+   <template>
+     <svg>
+       <use :href="require('@/assets/icons/home.svg?url')"></use>
+     </svg>
+   </template>
+   
+   <template>
+     <svg v-html="require('@/assets/icons/home.svg?html')"></svg>
+   </template>
+   ```
+
+### vitest
+
+Vitest 是一个 Vite 的测试工具。它可以让我们轻松地为 Vite 项目添加单元测试和端到端测试。
+
+主要特征:
+
+1. 为 Vite 项目添加测试 
+2. 支持 Jest 风格的单元测试 
+3. 支持 Cypress 风格的 E2E 测试
+4. 内置代码覆盖率报告 
+5. 和 Vite 无缝集成,使用 Vite 解析模块 
+6. 支持 TS/JS 和 Vue/React 项目
+
+安装：
+
+```bash
+npm install -D vitest
+```
+
+使用：
+
+1. 在 package.json 中添加测试脚本
+
+   ```json
+   "scripts": {
+     "test": "vitest"
+   }
+   ```
+
+2. 编写 Jest 风格的单元测试
+
+   ```javascript
+   import { expect, it, vi } from 'vitest'
+   
+   it('adds 1 + 2 to equal 3', () => {
+     expect(1 + 2).toEqual(3)
+   })
+   ```
+
+3. 编写 Cypress 风格的 E2E 测试
+
+   ```javascript
+   it('navigates to todo app', () => {
+     cy.visit('http://localhost:3000/')
+     cy.contains('Todo')
+   })
+   ```
+
+4. 运行测试
+
+   ```bash
+   npm run test
+   ```
+
+### vue-eslint-parser
+
+vue-eslint-parser 是一个包,它包含了解析 .vue 文件所需的器件,并提供给 ESLint 使用。
+
+它可以让 ESLint 理解并校验 .vue 文件中的代码,包括:
+
+1. <template> 中的 Vue 模板语法 
+2. <script> 中的 JavaScript / TypeScript 代码 
+3. <style> 中的 CSS / LESS / SCSS 等样式 
+
+安装：
+
+```bash
+npm install -D eslint vue-eslint-parser
+```
+
+使用：
+
+在 .eslintrc.js 中配置 parser: 'vue-eslint-parser':
+
+```javascript
+module.exports = {
+  parser: 'vue-eslint-parser',
+  // ...
+}
+```
+
