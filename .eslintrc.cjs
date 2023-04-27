@@ -12,6 +12,9 @@
 // 3. "error" 或 2   -- 将该规则作为错误打开 （触发时退出代码为 1）
 //
 // 如果同一目录中有多个配置文件，则 ESLint 将仅适用一个。优先顺序为：
+
+const { trailingComma } = require("./prettier.config.cjs");
+
 // .eslintrc.js > .*.cjs > .*.yaml > .*.yml > .*.json > .eslintrc > package.json
 module.exports = {
   // 默认情况下，ESLint 会在所有父级目录中寻找配置文件，一直到根目录。如果想要所有的项目
@@ -169,7 +172,8 @@ module.exports = {
       "error",
       {
         // 覆盖 Eslint 的默认选项
-        endOfLine: "auto"
+        endOfLine: "auto",
+        trailingComma: "none"
       }
     ]
   }
