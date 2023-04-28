@@ -1,12 +1,11 @@
 /// <reference types="vitest" />
 
-
-import path, { resolve } from "path";
-import { type ConfigEnv, type UserConfigExport, loadEnv } from "vite";
-import vue from '@vitejs/plugin-vue';
-import vueJsx from '@vitejs/plugin-vue-jsx';
-import svgLoader from 'vite-svg-loader';
-import UnoCSS from 'unocss/vite';
+import path, { resolve } from "path"
+import { type ConfigEnv, type UserConfigExport, loadEnv } from "vite"
+import vue from "@vitejs/plugin-vue"
+import vueJsx from "@vitejs/plugin-vue-jsx"
+import svgLoader from "vite-svg-loader"
+import UnoCSS from "unocss/vite"
 import { createSvgIconsPlugin } from "vite-plugin-svg-icons"
 // @ts-expect-error
 import DefineOptions from "unplugin-vue-define-options/vite"
