@@ -1,5 +1,6 @@
 import { reactive } from "vue"
 
+/** 默认分页属性 */
 interface IDefaultPaginationData {
   total: number
   currentPage: number
@@ -8,6 +9,7 @@ interface IDefaultPaginationData {
   layout: string
 }
 
+/** 默认分页属性 - 可选 */
 type IPaginationData = Partial<IDefaultPaginationData>
 
 /** 默认的分页参数 */

@@ -20,7 +20,7 @@ interface IFetchSelectProps {
   api: () => Promise<IApiData>
 }
 
-/**  */
+/** select 选择项 */
 export function useFetchSelect(props: IFetchSelectProps) {
   const { api } = props
   const loading = ref<boolean>(false)

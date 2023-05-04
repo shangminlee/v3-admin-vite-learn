@@ -1,5 +1,6 @@
 import { ElLoading, type LoadingOptions } from "element-plus"
 
+/** 默认加载项配置 */
 const defaultOptions = {
   lock: true,
   text: "加载中..."

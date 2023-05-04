@@ -1,12 +1,14 @@
 import { getActiveThemeName, setActiveThemeName } from "@/utils/cache/localStorage"
 import { ref, watchEffect } from "vue"
 
+/** 默认主题名字 */
 const DEFAULT_THEME_NAME = "normal"
 type DefaultThemeNameType = typeof DEFAULT_THEME_NAME
 
 /** 注册的主题名称, 其中 DefaultThemeNameType 是必填的 */
 export type ThemeName = DefaultThemeNameType | "dark" | "dark-blue"
 
+/** 主题列表元素 */
 interface IThemeList {
   title: string
   name: ThemeName
@@ -31,6 +33,7 @@ const themeList: IThemeList[] = [
 /** 正在应用的主题名称 */
 const activeThemeName = ref<ThemeName>(getActiveThemeName() || DEFAULT_THEME_NAME)
 
+/** 设置主题 */
 const setTheme = (value: ThemeName) => {
   activeThemeName.value = value
 }
@@ -40,6 +43,7 @@ const setHtmlClassName = (value: ThemeName) => {
   document.documentElement.className = value
 }
 
+/** 初始化主题 */
 const initTheme = () => {
   watchEffect(() => {
     const value = activeThemeName.value
