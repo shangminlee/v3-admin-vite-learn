@@ -13,6 +13,7 @@ interface IAsyncRouteSettings {
   defaultRoles: Array<string>
 }
 
+/** 异步路由设置 */
 const asyncRouteSettings: IAsyncRouteSettings = {
   open: true,
   defaultRoles: ["DEFAULT_ROLE"]

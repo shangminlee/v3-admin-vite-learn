@@ -60,6 +60,7 @@ VXETable.setup({
   }
 })
 
+/** 注册 vxe table 所有组件 */
 export function loadVxeTable(app: App) {
   /** Vxe Table 组件完整引入 */
   app.use(VXETable)

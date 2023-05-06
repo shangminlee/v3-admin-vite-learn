@@ -20,7 +20,7 @@ interface ILayoutSettings {
   showColorWeakness: boolean
 }
 
-/** 默认配置 */
+/** 布局默认配置 */
 const layoutSettings: ILayoutSettings = {
   showSettings: true,
   showTagsView: true,
