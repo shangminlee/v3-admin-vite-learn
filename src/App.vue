@@ -1,30 +1,25 @@
 <script setup lang="ts">
-import HelloWorld from "./components/HelloWorld.vue"
+import { h } from "vue"
+import { useTheme } from "./hooks/useTheme"
+import zhCN from "element-plus/lib/locale/lang/zh-cn"
+import { ElNotification } from "element-plus"
+
+const { initTheme } = useTheme()
+/** 初始化主题 */
+initTheme()
+/** 将 Element Plus 的语言设置为中文 */
+const locale = zhCN
+
+ElNotification({
+  title: "Hello",
+  message: h("a", { style: "color: teal" }, "初始化通知"),
+  duration: 0,
+  position: "bottom-right"
+})
 </script>
 
 <template>
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
-  </div>
-  <HelloWorld msg="Vite + Vue" />
+  <ElConfigProvider :locale="locale">
+    <RouterView />
+  </ElConfigProvider>
 </template>
-
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
-</style>

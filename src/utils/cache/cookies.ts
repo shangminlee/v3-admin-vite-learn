@@ -1,5 +1,5 @@
-import CacheKey from '@/constants/cacheKey'
-import Cookies from 'js-cookie'
+import CacheKey from "@/constants/cacheKey"
+import Cookies from "js-cookie"
 
 /** 获取Token */
 export const getToken = () => {
@@ -7,7 +7,7 @@ export const getToken = () => {
 }
 
 /** 设置Token */
-export const setToken = (token: string) {
+export const setToken = (token: string) => {
   Cookies.set(CacheKey.TOKEN, token)
 }
 
