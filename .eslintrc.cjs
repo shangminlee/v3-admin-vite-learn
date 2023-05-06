@@ -13,7 +13,7 @@
 //
 // 如果同一目录中有多个配置文件，则 ESLint 将仅适用一个。优先顺序为：
 
-const { trailingComma } = require("./prettier.config.cjs");
+const { trailingComma } = require("./prettier.config.cjs")
 
 // .eslintrc.js > .*.cjs > .*.yaml > .*.yml > .*.json > .eslintrc > package.json
 module.exports = {
@@ -33,8 +33,8 @@ module.exports = {
   // 更多的环境配置可以参考官方文档
   env: {
     browser: true, // 可以试用 window、document 等全局变量
-    node: true,    // 可以使用 require、module 等 Node.js 全局变量
-    es6: true,     // 启用 ES6 语法支持
+    node: true, // 可以使用 require、module 等 Node.js 全局变量
+    es6: true // 启用 ES6 语法支持
   },
 
   // 用于指定全局变量，每个模块和外部依赖都有可能注入自己的全局变量，为了避免这被识别成错误，
@@ -83,7 +83,7 @@ module.exports = {
 
   // Vue 项目中使用 ESLint 时,我们需要将 parser 配置成 vue-eslint-parser。
   // 这可以让 ESLint 支持解析 .vue 文件中的 Vue 语法
-  parser: 'vue-eslint-parser',
+  parser: "vue-eslint-parser",
   // 用于定义 TypeScript ESLint 解析器 @typescript-eslint/parser 的选项
   parserOptions: {
     // 解析 .ts 和 .tsx 文件

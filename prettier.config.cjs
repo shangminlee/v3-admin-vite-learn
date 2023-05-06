@@ -18,4 +18,4 @@ module.exports = {
   semi: false,
   /** 是否使用 Tab 格式化 */
   useTabs: false
-};
+}
