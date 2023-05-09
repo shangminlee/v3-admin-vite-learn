@@ -3,7 +3,7 @@ import { defineStore } from "pinia"
 import { ref } from "vue"
 
 /** 系统设置状态管理 */
-export const useSettingStore = defineStore("settings", () => {
+export const useSettingsStore = defineStore("settings", () => {
   const fixedHeader = ref<boolean>(layoutSettings.fixedHeader)
   const showSettings = ref<boolean>(layoutSettings.showSettings)
   const showTagsView = ref<boolean>(layoutSettings.showTagsView)

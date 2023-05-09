@@ -1,7 +1,71 @@
 import { createRouter, createWebHashHistory, createWebHistory, RouteRecordRaw } from "vue-router"
 
+/** 页面布局 */
+const Layout = () => import("@/layout/index.vue")
+
+/** 重定向页面 */
+const RedirectPage: RouteRecordRaw = {
+  path: "/redirect",
+  component: Layout,
+  meta: {
+    hidden: true
+  },
+  children: [
+    {
+      path: "/redirect/:path(.*)",
+      component: () => import("@/views/redirect/index.vue")
+    }
+  ]
+}
+/** 403页面 */
+const ForbiddenPage = {
+  path: "/403",
+  component: () => import("@/views/error-page/403.vue"),
+  meta: {
+    hidden: true
+  }
+}
+
+/** 404页面 */
+const NotFoundPage = {
+  path: "/404",
+  component: () => import("@/views/error-page/404.vue"),
+  meta: {
+    hidden: true
+  },
+  alias: "/:pathMatch(.*)*"
+}
+
+/** 登录页面 */
+const LoginPage = {
+  path: "/login",
+  component: () => import("@/views/login/index.vue"),
+  meta: {
+    hidden: true
+  }
+}
+
+/** 首页 */
+const DashboardPage = {
+  path: "/",
+  component: Layout,
+  redirect: "/dashboard",
+  children: [
+    {
+      path: "dashboard",
+      component: () => import("@/views/dashboard/index.vue"),
+      name: "Dashboard",
+      meta: {
+        title: "首页",
+        svgIcon: "dashboard",
+        affix: true
+      }
+    }
+  ]
+}
+
 /** 常驻路由 */
-export const constantRoutes: RouteRecordRaw[] = []
+export const constantRoutes: RouteRecordRaw[] = [RedirectPage, ForbiddenPage, NotFoundPage, LoginPage, DashboardPage]
 
 /**
  * 动态路由

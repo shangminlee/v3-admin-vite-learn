@@ -2,7 +2,7 @@ import { defineStore } from "pinia"
 import { getToken, setToken } from "@/utils/cache/cookies"
 import { ref } from "vue"
 import { usePermissionStore } from "./permission"
-import { useTagViewStore } from "./tags-view"
+import { useTagsViewStore } from "./tags-view"
 import { ILoginRequestData } from "@/api/login/types/login"
 import { getUserInfoApi, loginApi } from "@/api/login"
 import { LoginResponseData, UserInfoResponseData } from "../../api/login/types/login"
@@ -23,7 +23,7 @@ export const useUserStore = defineStore("user", () => {
   // 权限状态管理
   const permissionStore = usePermissionStore()
   // 标签状态管理
-  const tagViewStore = useTagViewStore()
+  const tagViewStore = useTagsViewStore()
 
   /** 设置角色数组 */
   const setRoles = (value: string[]) => {

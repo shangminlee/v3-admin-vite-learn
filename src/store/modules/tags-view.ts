@@ -6,7 +6,7 @@ import { ref } from "vue"
 export type ITagView = Partial<RouteLocationNormalized>
 
 /** 标签状态管理 */
-export const useTagViewStore = defineStore("tag-view", () => {
+export const useTagsViewStore = defineStore("tag-view", () => {
   // 访问过的页面
   const visitedViews = ref<ITagView[]>([])
   // 已缓存的页面
