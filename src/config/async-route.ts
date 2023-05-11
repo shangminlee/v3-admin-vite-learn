@@ -13,10 +13,11 @@ interface IAsyncRouteSettings {
   defaultRoles: Array<string>
 }
 
-/** 异步路由设置 */
+/** 异步路由默认设置 */
 const asyncRouteSettings: IAsyncRouteSettings = {
   open: true,
   defaultRoles: ["DEFAULT_ROLE"]
 }
 
+/** 导出默认路由设置 */
 export default asyncRouteSettings

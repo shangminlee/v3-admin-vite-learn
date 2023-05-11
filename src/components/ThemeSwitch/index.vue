@@ -4,31 +4,33 @@ import { MagicStick } from "@element-plus/icons-vue"
 
 const { themeList, activeThemeName, setTheme } = useTheme()
 
+/** 设置主题 */
 const handleSetTheme = (name: ThemeName) => {
   setTheme(name)
 }
 </script>
 
 <template>
-  <el-dropdown trigger="click" @command="handleSetTheme">
+  <!-- 下拉菜单 -->
+  <ElDropdown trigger="click" @command="handleSetTheme">
     <div>
-      <el-tooltip effect="dark" content="主题模式" placement="bottom">
-        <el-icon :size="20">
+      <ElTooltip effect="dark" content="主题模式" placement="bottom">
+        <ElIcon :size="20">
           <MagicStick />
-        </el-icon>
-      </el-tooltip>
+        </ElIcon>
+      </ElTooltip>
     </div>
     <template #dropdown>
-      <el-dropdown-menu>
-        <el-dropdown-item
+      <ElDropdownMenu>
+        <ElDropdownItem
           v-for="(theme, index) in themeList"
           :key="index"
           :disabled="activeThemeName === theme.name"
           :command="theme.name"
         >
           <span>{{ theme.title }}</span>
-        </el-dropdown-item>
-      </el-dropdown-menu>
+        </ElDropdownItem>
+      </ElDropdownMenu>
     </template>
-  </el-dropdown>
+  </ElDropdown>
 </template>

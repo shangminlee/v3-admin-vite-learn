@@ -1,5 +1,5 @@
 <template>
-  <div>{{ title }}</div>
+  <div style="height: 600px; display: flex; justify-content: center; align-items: center">{{ title }}</div>
 </template>
 
 <script setup lang="ts">

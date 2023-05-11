@@ -5,9 +5,10 @@ import NotifyList from "./NotifyList.vue"
 import { Bell } from "@element-plus/icons-vue"
 import { ElMessage } from "element-plus"
 
-// 标签名称
+/** 标签模型 */
 type TabNameType = "通知" | "消息" | "待办"
 
+/** 通知消息 默认数据模型 */
 interface IDataItem {
   name: TabNameType
   type: "primary" | "success" | "warning" | "danger" | "info"
@@ -44,39 +45,53 @@ const badgeValue = computed(() => {
   }
   return value
 })
-/** 角标最大值 */
+/** 角标（徽章）最大值 */
 const badgeMax = 99
 /** 面板宽度 */
 const popoverWidth = 350
 /** 当前 Tab */
 const activeName = ref<TabNameType>("通知")
 
+/** 跳转到更多页面 */
 const handleHistory = () => {
+  /** 示例为弹出提示消息 */
   ElMessage.success(`跳转到${activeName.value}历史页面`)
 }
 </script>
 
 <template>
   <div class="notify">
+    <!-- 气泡卡片 -->
     <ElPopover placement="bottom" :width="popoverWidth" trigger="click">
+      <!-- 气泡卡片插槽 触发 popover 显示的 HTML 元素-->
       <template #reference>
+        <!-- 徽章 数据为模拟数据，应该改成动态获取 -->
         <ElBadge :value="badgeValue" :max="badgeMax" :hidden="badgeValue === 0">
+          <!-- 文字提示 effect：主题 -->
           <ElTooltip effect="dark" content="消息通知" placement="bottom">
+            <!-- 图标 -->
             <ElIcon :size="20">
               <Bell />
             </ElIcon>
           </ElTooltip>
         </ElBadge>
       </template>
+      <!-- 气泡卡片->默认插槽 -->
       <template #default>
-        <ElTabs v-model="activeName" class="demo-tabs" stretch>
+        <!-- 标签页 -->
+        <ElTabs v-model="activeName" stretch>
+          <!-- 标签容器 -->
           <ElTabPane v-for="(item, index) in data" :name="item.name" :key="index">
             <template #label>
-              <ElBadge :value="item.list.length" :max="badgeMax" :type="item.type" />
+              <ElBadge :value="item.list.length" :max="badgeMax" :type="item.type">
+                {{ item.name }}
+              </ElBadge>
             </template>
-            <ElScrollbar height="400px">
-              <NotifyList :list="item.list" />
-            </ElScrollbar>
+            <template #default>
+              <ElScrollbar height="400px">
+                <NotifyList :list="item.list" />
+              </ElScrollbar>
+            </template>
           </ElTabPane>
         </ElTabs>
         <div class="notify-history">
@@ -86,3 +101,16 @@ const handleHistory = () => {
     </ElPopover>
   </div>
 </template>
+
+<style lang="scss" scoped>
+.notify {
+  margin-right: 10px;
+  // 引用自定义属性
+  color: var(--el-text-color-regular);
+}
+.notify-history {
+  text-align: center;
+  padding-top: 12px;
+  border-top: 1px solid var(--el-border-color);
+}
+</style>

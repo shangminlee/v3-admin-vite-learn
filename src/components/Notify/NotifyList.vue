@@ -11,8 +11,11 @@ const props = defineProps({
 </script>
 
 <template>
+  <!-- 空状态 -->
   <ElEmpty v-if="props.list.length === 0" />
-  <ElCard v-else v-for="(item, index) in props.list" :key="index" shadow="never" class="">
+  <!-- 卡片 -->
+  <ElCard v-else v-for="(item, index) in props.list" :key="index" shadow="never" class="card-container">
+    <!-- 卡片header信息 -->
     <template #header>
       <div class="card-header">
         <div>
@@ -29,9 +32,12 @@ const props = defineProps({
         </div>
       </div>
     </template>
-    <div class="card-body">
-      {{ item.description ?? "No Data" }}
-    </div>
+    <!-- 卡片body内容 -->
+    <template #default>
+      <div class="card-body">
+        {{ item.description ?? "No Data" }}
+      </div>
+    </template>
   </ElCard>
 </template>
 

@@ -55,6 +55,7 @@ onUnmounted(() => {
 
 <template>
   <div @click="click">
+    <!-- 文字提示 -->
     <ElTooltip effect="dark" :content="tips" placement="bottom">
       <SvgIcon :name="isFullscreen ? 'fullscreen-exit' : 'fullscreen'" />
     </ElTooltip>

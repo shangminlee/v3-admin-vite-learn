@@ -1,28 +1,37 @@
+/** 通知详细 */
 export interface IListItem {
+  // 图片链接
   avatar?: string
+  // 标题
   title: string
+  // 时间
   datetime?: string
+  // 描述
   description?: string
+  // 通知颜色
   status?: "" | "success" | "info" | "warning" | "danger"
+  // 扩展信息
   extra?: string
 }
 
+/** 通知 mock 数据 */
 export const notifyData: IListItem[] = [
-  {
-    avatar: "https://gw.alipayobjects.com/zos/rmsportal/OKJXDXrmkNshAMvwtvhu.png",
-    title: "V3 Admin Vite 上线啦",
-    datetime: "半年前",
-    description:
-      "一个免费开源的中后台管理系统基础解决方案，基于 Vue3、TypeScript、Element Plus、Pinia 和 Vite 等主流技术"
-  },
-  {
-    avatar: "https://gw.alipayobjects.com/zos/rmsportal/OKJXDXrmkNshAMvwtvhu.png",
-    title: "V3 Admin 上线啦",
-    datetime: "一年前",
-    description: "一个中后台管理系统基础解决方案，基于 Vue3、TypeScript、Element Plus 和 Pinia"
-  }
+  // {
+  //   avatar: "https://gw.alipayobjects.com/zos/rmsportal/OKJXDXrmkNshAMvwtvhu.png",
+  //   title: "V3 Admin Vite 上线啦",
+  //   datetime: "半年前",
+  //   description:
+  //     "一个免费开源的中后台管理系统基础解决方案，基于 Vue3、TypeScript、Element Plus、Pinia 和 Vite 等主流技术"
+  // },
+  // {
+  //   avatar: "https://gw.alipayobjects.com/zos/rmsportal/OKJXDXrmkNshAMvwtvhu.png",
+  //   title: "V3 Admin 上线啦",
+  //   datetime: "一年前",
+  //   description: "一个中后台管理系统基础解决方案，基于 Vue3、TypeScript、Element Plus 和 Pinia"
+  // }
 ]
 
+/** 消息 mock 数据 */
 export const messageData: IListItem[] = [
   {
     avatar: "https://gw.alipayobjects.com/zos/rmsportal/ThXAXghbEsBCCSDihZxY.png",
@@ -44,6 +53,7 @@ export const messageData: IListItem[] = [
   }
 ]
 
+/** 待办 mock 数据 */
 export const todoData: IListItem[] = [
   {
     title: "任务名称",
