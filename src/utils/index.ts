@@ -10,6 +10,10 @@ export const formatDateTime = (time: string | number | Date) => {
 }
 
 /** 将全局 CSS 变量导入 JS 中使用 */
+/** 1. 在 JavaScript 中获取 CSS 变量设置的主题色值等而进行逻辑运算
+ *  2. 当 CSS 变量的值影响 JS 中某些计算或状态时获取其最新值
+ *  3. 在某些环境下无法通过CSS访问变量时,通过JS来间接获取其值
+ */
 export const getCssVariableValue = (cssVariableName: string) => {
   let cssVariableValue = ""
   try {

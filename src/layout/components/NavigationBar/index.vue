@@ -11,27 +11,37 @@ import ThemeSwitch from "@/components/ThemeSwitch/index.vue"
 import Screenfull from "@/components/Screenfull/index.vue"
 import Notify from "@/components/Notify/index.vue"
 
+/** 路由 */
 const router = useRouter()
+/** 应用状态管理 */
 const appStore = useAppStore()
+/** 各种设置的状态管理 */
 const settingsStore = useSettingsStore()
+/** 用户状态管理 */
 const userStore = useUserStore()
 
+/** 侧边栏 */
 const sidebar = computed(() => {
   return appStore.sidebar
 })
+/** 通知 */
 const showNotify = computed(() => {
   return settingsStore.showNotify
 })
+/** 主题 */
 const showThemeSwitch = computed(() => {
   return settingsStore.showThemeSwitch
 })
+/** 全屏 */
 const showScreenfull = computed(() => {
   return settingsStore.showScreenfull
 })
 
+/** 切换侧边栏事件 */
 const toggleSidebar = () => {
   appStore.toggleSidebar(false)
 }
+/** 登出事件 */
 const logout = () => {
   userStore.logout()
   router.push("/login")
@@ -40,17 +50,26 @@ const logout = () => {
 
 <template>
   <div class="navigation-bar">
+    <!-- 侧边栏展开/缩放 -->
     <Hamburger :is-active="sidebar.opened" class="hamburger" @toggle-click="toggleSidebar" />
+    <!-- 面包屑导航 -->
     <Breadcrumb class="breadcrumb" />
+    <!-- 导航栏左侧各种操作 -->
     <div class="right-menu">
+      <!-- 全屏按钮 -->
       <Screenfull v-if="showScreenfull" class="right-menu-item" />
+      <!-- 主题切换 -->
       <ThemeSwitch v-if="showThemeSwitch" class="right-menu-item" />
+      <!-- 通知 -->
       <Notify v-if="showNotify" class="right-menu-item" />
+      <!-- 账号各种操作 -->
       <ElDropdown class="right-menu-item">
+        <!-- 头像和用户姓名 -->
         <div class="right-menu-avatar">
           <ElAvatar :icon="UserFilled" :size="30" />
           <span>{{ userStore.username }}</span>
         </div>
+        <!-- 下拉框操作 -->
         <template #dropdown>
           <ElDropdownMenu>
             <a target="_blank" href="https://juejin.cn/post/7089377403717287972">

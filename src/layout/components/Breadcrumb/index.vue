@@ -3,23 +3,29 @@ import { ref, watch } from "vue"
 import { RouteLocationMatched, useRoute, useRouter } from "vue-router"
 import { compile } from "path-to-regexp"
 
+/** 当前路由 */
 const route = useRoute()
+/** 路由 */
 const router = useRouter()
 
+/** 面包屑 */
 const breadcrumbs = ref<RouteLocationMatched[]>([])
 
+/** 获取面包屑 */
 const getBreadcrumb = () => {
   breadcrumbs.value = route.matched.filter((item) => {
     return item.meta && item.meta.title && item.meta.breadcrumb !== false
   })
 }
 
+/** 编译路径 */
 const pathCompile = (path: string) => {
   const { params } = route
   const toPath = compile(path)
   return toPath(params)
 }
 
+/** 处理跳转链接 */
 const handleLink = (item: RouteLocationMatched) => {
   const { redirect, path } = item
   if (redirect) {
@@ -29,6 +35,7 @@ const handleLink = (item: RouteLocationMatched) => {
   router.push(pathCompile(path))
 }
 
+/** 监控路径变化 */
 watch(
   () => route.path,
   (path) => {
@@ -60,6 +67,7 @@ getBreadcrumb()
   font-weight: 400 !important;
 }
 
+// 匹配 “同时” 具有 app-breadcrumb el-breadcrumb 两类的元素
 .app-breadcrumb.el-breadcrumb {
   display: inline-block;
   font-size: 14px;

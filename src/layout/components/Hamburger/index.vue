@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { Expand, Fold } from "@element-plus/icons-vue"
 
+/** 定义属性 */
 const props = defineProps({
   isActive: {
     type: Boolean,
@@ -8,10 +9,12 @@ const props = defineProps({
   }
 })
 
+/** 触发事件 */
 const emit = defineEmits<{
   (e: "toggle-click"): void
 }>()
 
+/** 切换菜单点击事件 */
 const toggleClick = () => {
   emit("toggle-click")
 }

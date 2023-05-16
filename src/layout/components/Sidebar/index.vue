@@ -8,18 +8,22 @@ import { useSettingsStore } from "@/store/modules/settings"
 import SidebarItem from "./SidebarItem.vue"
 import SidebarLogo from "./SidebarLogo.vue"
 import { getCssVariableValue } from "@/utils"
+import { ElScrollbar } from "element-plus"
 
+/** CSS 变量 */
 const v3SidebarMenuBgColor = getCssVariableValue("--v3-sidebar-menu-bg-color")
 const v3SidebarMenuTextColor = getCssVariableValue("--v3-sidebar-menu-text-color")
 const v3SidebarMenuActiveTextColor = getCssVariableValue("--v3-sidebar-menu-active-text-color")
 
+/** 状态管理 */
 const route = useRoute()
 const appStore = useAppStore()
 const permissionStore = usePermissionStore()
 const settingsStore = useSettingsStore()
-
+/** 是否显示 Logo */
 const { showSidebarLogo } = storeToRefs(settingsStore)
 
+/** 当设置了该属性进入路由时，则会高亮 activeMenu 属性对应的侧边栏。 */
 const activeMenu = computed(() => {
   const { meta, path } = route
   if (meta?.activeMenu) {
@@ -28,16 +32,19 @@ const activeMenu = computed(() => {
   return path
 })
 
+/** 是否折叠 */
 const isCollapse = computed(() => {
   return !appStore.sidebar.opened
 })
+
+console.log(permissionStore.routes)
 </script>
 
 <template>
   <div :class="{ 'has-logo': showSidebarLogo }">
     <SidebarLogo v-if="showSidebarLogo" :collapse="isCollapse" />
-    <el-scrollbar wrap-class="scrollbar-wrapper">
-      <el-menu
+    <ElScrollbar wrap-class="scrollbar-wrapper">
+      <ElMenu
         :default-active="activeMenu"
         :collapse="isCollapse"
         :background-color="v3SidebarMenuBgColor"
@@ -54,8 +61,8 @@ const isCollapse = computed(() => {
           :base-path="route.path"
           :is-collapse="isCollapse"
         />
-      </el-menu>
-    </el-scrollbar>
+      </ElMenu>
+    </ElScrollbar>
   </div>
 </template>
 
